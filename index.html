@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Make × Google Drive 연결 오류 해결 가이드</title>
-<meta name="description" content="Make에서 Google Drive를 연결할 때 발생하는 redirect_uri_mismatch, restricted scopes 오류를 해결하는 단계별 가이드" />
+<meta name="description" content="Make에서 Google Drive를 연결할 때 발생하는 redirect_uri_mismatch, restricted scopes 오류를 단계별 스크린샷과 함께 해결하는 가이드" />
 <style>
   :root {
     --bg: #f7f7f5;
@@ -32,12 +32,12 @@
     -webkit-font-smoothing: antialiased;
   }
   .container {
-    max-width: 820px;
+    max-width: 860px;
     margin: 0 auto;
     padding: 56px 24px 96px;
   }
   header.hero {
-    margin-bottom: 48px;
+    margin-bottom: 40px;
     padding-bottom: 32px;
     border-bottom: 1px solid var(--border);
   }
@@ -65,7 +65,7 @@
   }
   h2 {
     font-size: 22px;
-    margin: 56px 0 16px;
+    margin: 0 0 16px;
     letter-spacing: -0.005em;
     display: flex;
     align-items: center;
@@ -85,17 +85,17 @@
     flex-shrink: 0;
   }
   h3 {
-    font-size: 16px;
-    margin: 24px 0 8px;
+    font-size: 15px;
+    margin: 20px 0 6px;
     color: var(--muted);
     font-weight: 600;
   }
-  p { margin: 0 0 14px; }
+  p { margin: 0 0 12px; }
   ul, ol {
-    margin: 0 0 14px;
+    margin: 0 0 12px;
     padding-left: 22px;
   }
-  li { margin-bottom: 6px; }
+  li { margin-bottom: 4px; }
   strong { font-weight: 600; }
   code {
     background: var(--code-bg);
@@ -125,34 +125,6 @@
   .why h2 {
     margin-top: 0;
     font-size: 18px;
-  }
-  .tldr {
-    background: #ecfdf5;
-    border: 1px solid #6ee7b7;
-    border-radius: 12px;
-    padding: 22px 26px;
-    margin-bottom: 32px;
-  }
-  .tldr h2 {
-    margin: 0 0 14px;
-    font-size: 18px;
-    color: #065f46;
-  }
-  .tldr ol {
-    margin: 0;
-    padding-left: 22px;
-    font-size: 15px;
-  }
-  .tldr ol li {
-    margin-bottom: 6px;
-    color: #064e3b;
-  }
-  .tldr .end {
-    margin-top: 14px;
-    margin-bottom: 0;
-    font-size: 14px;
-    color: #047857;
-    font-weight: 600;
   }
   .warn {
     background: var(--warn-bg);
@@ -213,6 +185,24 @@
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
     color: var(--muted);
   }
+  .screenshot {
+    margin: 16px 0 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fafafa;
+  }
+  .screenshot img {
+    width: 100%;
+    display: block;
+  }
+  .screenshot .caption {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 8px 14px;
+    border-top: 1px solid var(--border);
+    background: #fff;
+  }
   .toc {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -223,7 +213,7 @@
   .toc h3 {
     margin: 0 0 12px;
     color: var(--text);
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -244,7 +234,7 @@
   }
   .toc a:hover { color: var(--accent); text-decoration: underline; }
   footer {
-    margin-top: 80px;
+    margin-top: 64px;
     padding-top: 24px;
     border-top: 1px solid var(--border);
     color: var(--muted);
@@ -266,7 +256,7 @@
   <header class="hero">
     <span class="tag">자동화 가이드</span>
     <h1>Make × Google Drive 연결 오류 해결 가이드</h1>
-    <p class="subtitle"><code>restricted scopes</code> / <code>redirect_uri_mismatch</code> 오류를 단계별로 해결합니다.</p>
+    <p class="subtitle">실제 화면 스크린샷으로 따라가는 단계별 설정 가이드. <code>restricted scopes</code> / <code>redirect_uri_mismatch</code> 오류를 해결합니다.</p>
   </header>
 
   <div class="why">
@@ -282,31 +272,31 @@
     <p style="margin-bottom:0;">그래서 <strong>Google Cloud Console에서 직접 OAuth 인증을 설정</strong>해줘야 합니다.</p>
   </div>
 
-  <div class="tldr">
-    <h2>⚡ Google Cloud에서 해야 하는 건 이게 전부</h2>
-    <ol>
-      <li>왼쪽 메뉴 <strong>API 및 서비스</strong></li>
-      <li><strong>라이브러리</strong></li>
-      <li><strong>Google Drive API</strong> 검색</li>
-      <li>클릭</li>
-      <li><strong>사용</strong> 버튼 클릭</li>
-    </ol>
-    <p class="end">끝이에요. 그 다음에 OAuth Client 만들고 Make에 연결만 해주면 됩니다.</p>
-  </div>
-
   <div class="toc">
     <h3>전체 단계</h3>
     <ol>
       <li><a href="#step1">Google Cloud Console 접속</a></li>
-      <li><a href="#step2">새 프로젝트 만들기</a></li>
-      <li><a href="#step3">Google Drive API 활성화</a></li>
-      <li><a href="#step4">OAuth 동의 화면 설정</a></li>
-      <li><a href="#step5">테스트 사용자 추가</a></li>
-      <li><a href="#step6">OAuth Client 만들기</a></li>
-      <li><a href="#step7">Redirect URI 추가</a></li>
-      <li><a href="#step8">Client ID / Secret 복사</a></li>
-      <li><a href="#step9">Make에서 연결</a></li>
-      <li><a href="#step10">Google 로그인</a></li>
+      <li><a href="#step2">프로젝트 선택 열기</a></li>
+      <li><a href="#step3">새 프로젝트 만들기</a></li>
+      <li><a href="#step4">프로젝트 이름 확정</a></li>
+      <li><a href="#step5">Google 인증 플랫폼 시작</a></li>
+      <li><a href="#step6">앱 정보 입력</a></li>
+      <li><a href="#step7">대상(외부) 선택</a></li>
+      <li><a href="#step8">연락처 정보 입력</a></li>
+      <li><a href="#step9">정책 동의 후 만들기</a></li>
+      <li><a href="#step10">OAuth 개요 확인</a></li>
+      <li><a href="#step11">테스트 사용자 화면 열기</a></li>
+      <li><a href="#step12">테스트 사용자 추가</a></li>
+      <li><a href="#step13">OAuth 클라이언트 만들기 시작</a></li>
+      <li><a href="#step14">클라이언트 유형/이름 설정</a></li>
+      <li><a href="#step15">Redirect URI 추가</a></li>
+      <li><a href="#step16">Client ID / Secret 확인</a></li>
+      <li><a href="#step17">API 라이브러리 열기</a></li>
+      <li><a href="#step18">Google Drive API 검색</a></li>
+      <li><a href="#step19">Google Drive API 사용</a></li>
+      <li><a href="#step20">API 사용 설정 확인</a></li>
+      <li><a href="#step21">클라이언트 상세 다시 확인</a></li>
+      <li><a href="#step22">Make에서 연결</a></li>
       <li><a href="#errors">자주 발생하는 오류</a></li>
     </ol>
   </div>
@@ -318,113 +308,226 @@
       <span class="url-text">https://console.cloud.google.com/</span>
       <button class="copy-btn" data-copy="https://console.cloud.google.com/">복사</button>
     </div>
+    <div class="screenshot">
+      <img src="images/1.png" alt="Google Cloud 대시보드 시작 화면" loading="lazy" />
+      <div class="caption">Google Cloud 대시보드 — 상단 좌측에서 프로젝트를 선택할 수 있습니다.</div>
+    </div>
   </section>
 
   <section class="card" id="step2">
-    <h2><span class="step-num">2</span> 새 프로젝트 만들기</h2>
-    <p>상단 프로젝트 선택 → <strong>새 프로젝트</strong></p>
-    <h3>예시</h3>
-    <ul>
-      <li>프로젝트 이름: <code>Make Automation</code></li>
-    </ul>
-    <p>생성 완료 후 해당 프로젝트를 선택합니다.</p>
+    <h2><span class="step-num">2</span> 프로젝트 선택 열기</h2>
+    <p>상단의 <strong>프로젝트 선택</strong> 영역을 클릭해 프로젝트 목록을 엽니다. 오른쪽 위의 <strong>새 프로젝트</strong> 버튼을 누릅니다.</p>
+    <div class="screenshot">
+      <img src="images/2.png" alt="프로젝트 선택 모달 — 새 프로젝트 버튼" loading="lazy" />
+      <div class="caption">프로젝트 선택 모달 우측 상단의 <strong>새 프로젝트</strong> 클릭.</div>
+    </div>
   </section>
 
   <section class="card" id="step3">
-    <h2><span class="step-num">3</span> Google Drive API 활성화</h2>
-    <p>왼쪽 메뉴 <span class="menu-path">API 및 서비스 → 라이브러리</span></p>
-    <ol>
-      <li><strong>Google Drive API</strong> 검색</li>
-      <li>클릭</li>
-      <li><strong>사용</strong> 버튼 클릭</li>
-    </ol>
-    <div class="warn">필요 시 <strong>Google Sheets API</strong>도 같은 방식으로 활성화하세요.</div>
+    <h2><span class="step-num">3</span> 새 프로젝트 만들기</h2>
+    <p>프로젝트 이름을 입력합니다. 예: <code>MAKE (0514)</code>처럼 알아보기 쉬운 이름.</p>
+    <div class="screenshot">
+      <img src="images/3.png" alt="새 프로젝트 이름 입력 화면" loading="lazy" />
+      <div class="caption">프로젝트 이름은 추후 변경 가능하지만 프로젝트 ID는 변경할 수 없습니다.</div>
+    </div>
   </section>
 
   <section class="card" id="step4">
-    <h2><span class="step-num">4</span> OAuth 동의 화면 설정</h2>
-    <p>왼쪽 메뉴 <span class="menu-path">API 및 서비스 → OAuth 동의 화면</span></p>
-    <h3>User Type</h3>
-    <ul><li><strong>외부(External)</strong> 선택</li></ul>
-    <h3>앱 이름</h3>
-    <ul><li><code>Make</code></li></ul>
-    <h3>사용자 지원 이메일</h3>
-    <ul><li>본인 이메일</li></ul>
-    <h3>개발자 연락처</h3>
-    <ul><li>본인 이메일</li></ul>
-    <p>입력 후 <strong>저장</strong>.</p>
+    <h2><span class="step-num">4</span> 프로젝트 이름 확정</h2>
+    <p>특수문자/공백 없이 입력하면 ID도 깔끔하게 생성됩니다 (예: <code>MAKE0514</code>). <strong>만들기</strong> 버튼을 누릅니다.</p>
+    <div class="screenshot">
+      <img src="images/4.png" alt="프로젝트 이름 MAKE0514 입력" loading="lazy" />
+      <div class="caption">프로젝트 ID는 자동 생성되며 이후 변경 불가입니다.</div>
+    </div>
   </section>
 
   <section class="card" id="step5">
-    <h2><span class="step-num">5</span> 테스트 사용자 추가</h2>
-    <p><span class="menu-path">OAuth 동의 화면 → 대상(Audience) 또는 테스트 사용자</span></p>
-    <p>아래 이메일을 추가합니다.</p>
-    <ul>
-      <li>본인 회사 이메일</li>
-      <li>실제 사용할 이메일</li>
-    </ul>
-    <h3>예시</h3>
-    <ul><li><code>suyeon.oh@day1company.co.kr</code></li></ul>
-    <p>입력 후 <strong>저장</strong>.</p>
+    <h2><span class="step-num">5</span> Google 인증 플랫폼 시작</h2>
+    <p>왼쪽 메뉴 <span class="menu-path">API 및 서비스 → OAuth 동의 화면</span>으로 이동하면 Google 인증 플랫폼 화면이 보입니다. <strong>시작하기</strong> 버튼을 클릭합니다.</p>
+    <div class="screenshot">
+      <img src="images/5.png" alt="Google 인증 플랫폼 브랜딩 시작 화면" loading="lazy" />
+      <div class="caption">아직 구성되지 않음 상태 — 가운데 <strong>시작하기</strong> 클릭.</div>
+    </div>
   </section>
 
   <section class="card" id="step6">
-    <h2><span class="step-num">6</span> OAuth Client 만들기</h2>
-    <p>왼쪽 메뉴 <span class="menu-path">사용자 인증 정보</span></p>
-    <p>→ <strong>사용자 인증 정보 만들기</strong> → <strong>OAuth 클라이언트 ID</strong></p>
-    <h3>애플리케이션 유형</h3>
-    <ul><li><strong>웹 애플리케이션</strong></li></ul>
-    <h3>이름</h3>
-    <ul><li><code>Make Connection</code></li></ul>
+    <h2><span class="step-num">6</span> 앱 정보 입력</h2>
+    <h3>앱 이름</h3>
+    <ul><li><code>MAKE</code></li></ul>
+    <h3>사용자 지원 이메일</h3>
+    <ul><li>본인 이메일 선택</li></ul>
+    <p>입력 후 <strong>다음</strong>.</p>
+    <div class="screenshot">
+      <img src="images/6.png" alt="앱 정보 - 앱 이름과 지원 이메일" loading="lazy" />
+      <div class="caption">1단계 앱 정보 — 사용자에게 동의를 요청할 때 표시되는 정보입니다.</div>
+    </div>
   </section>
 
   <section class="card" id="step7">
-    <h2><span class="step-num">7</span> Redirect URI 추가 <span style="color:#b42318;font-size:14px;font-weight:600;">(중요)</span></h2>
-    <p><strong>승인된 리디렉션 URI</strong> 항목에 아래 주소를 정확히 입력합니다.</p>
+    <h2><span class="step-num">7</span> 대상(외부) 선택</h2>
+    <p><strong>외부(External)</strong>를 선택합니다. Google 계정이 있는 모든 테스트 사용자가 쓸 수 있도록 하는 옵션입니다.</p>
+    <div class="screenshot">
+      <img src="images/7.png" alt="대상 단계 - 외부 선택" loading="lazy" />
+      <div class="caption">개인 계정으로 만들 땐 <strong>외부</strong>를 선택해야 합니다.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step8">
+    <h2><span class="step-num">8</span> 연락처 정보 입력</h2>
+    <p>Google에서 프로젝트 변경 사항을 알릴 때 사용하는 이메일을 입력합니다. <strong>본인 이메일</strong>로.</p>
+    <div class="screenshot">
+      <img src="images/8.png" alt="연락처 정보 - 이메일 입력" loading="lazy" />
+      <div class="caption">3단계 연락처 정보 — 알림 수신용 이메일.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step9">
+    <h2><span class="step-num">9</span> 정책 동의 후 만들기</h2>
+    <p><strong>Google API 서비스 사용자 데이터 정책</strong>에 동의하는 체크박스를 켜고 <strong>계속</strong> → <strong>만들기</strong>를 누릅니다.</p>
+    <div class="screenshot">
+      <img src="images/9.png" alt="4단계 완료 - 정책 동의" loading="lazy" />
+      <div class="caption">4단계 완료 — 정책 동의 후 만들기.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step10">
+    <h2><span class="step-num">10</span> OAuth 개요 확인</h2>
+    <p>만들기가 완료되면 <strong>OAuth 개요</strong> 화면이 열립니다. 이 화면에서 <strong>OAuth 클라이언트 만들기</strong> 버튼을 누를 수 있지만, 일단 먼저 <strong>테스트 사용자</strong>를 추가합니다.</p>
+    <div class="screenshot">
+      <img src="images/10.png" alt="OAuth 개요 화면" loading="lazy" />
+      <div class="caption">"OAuth 구성 생성됨" 메시지가 뜨면 정상.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step11">
+    <h2><span class="step-num">11</span> 테스트 사용자 화면 열기</h2>
+    <p>왼쪽 메뉴에서 <span class="menu-path">대상</span> 클릭. <strong>테스트 사용자</strong> 영역의 <strong>+ Add users</strong> 버튼을 확인합니다.</p>
+    <div class="screenshot">
+      <img src="images/11.png" alt="대상 - OAuth 사용자 한도 / 테스트 사용자 0명" loading="lazy" />
+      <div class="caption">테스트 사용자가 비어 있는 초기 상태. <strong>+ Add users</strong> 클릭.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step12">
+    <h2><span class="step-num">12</span> 테스트 사용자 추가</h2>
+    <p>실제 Make 연결에 사용할 본인 이메일을 추가합니다. 추가 후 사용자 정보 영역에 이메일이 1개 등록됩니다.</p>
+    <div class="screenshot">
+      <img src="images/12.png" alt="테스트 사용자 1명 추가 완료" loading="lazy" />
+      <div class="caption">테스트 사용자에 본인 이메일이 들어가야 OAuth 동의가 통과합니다.</div>
+    </div>
+    <div class="warn">⚠️ 여기에 등록 안 된 계정으로 로그인하면 <code>access_denied</code> / <code>restricted scopes</code> 오류가 납니다.</div>
+  </section>
+
+  <section class="card" id="step13">
+    <h2><span class="step-num">13</span> OAuth 클라이언트 만들기 시작</h2>
+    <p>왼쪽 메뉴 <span class="menu-path">클라이언트</span> 이동. 상단 <strong>+ 클라이언트 만들기</strong> 클릭.</p>
+    <div class="screenshot">
+      <img src="images/13.png" alt="클라이언트 목록 - 비어있는 상태" loading="lazy" />
+      <div class="caption">OAuth 2.0 클라이언트 ID 목록이 비어 있는 상태 — 새로 만듭니다.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step14">
+    <h2><span class="step-num">14</span> 클라이언트 유형/이름 설정</h2>
+    <h3>애플리케이션 유형</h3>
+    <ul><li><strong>웹 애플리케이션</strong></li></ul>
+    <h3>이름</h3>
+    <ul><li><code>MAKE</code></li></ul>
+    <div class="screenshot">
+      <img src="images/14.png" alt="OAuth 클라이언트 ID 만들기 - 유형과 이름" loading="lazy" />
+      <div class="caption">유형은 반드시 <strong>웹 애플리케이션</strong>으로 선택.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step15">
+    <h2><span class="step-num">15</span> Redirect URI 추가 <span style="color:#b42318;font-size:14px;font-weight:600;">(가장 중요)</span></h2>
+    <p>스크롤을 내려 <strong>승인된 리디렉션 URI</strong> 영역에서 <strong>+ URI 추가</strong>를 누르고 아래 주소를 정확히 입력합니다.</p>
     <div class="url-box">
       <span class="url-text">https://www.integromat.com/oauth/cb/google-restricted</span>
       <button class="copy-btn" data-copy="https://www.integromat.com/oauth/cb/google-restricted">복사</button>
     </div>
-    <div class="warn">⚠️ 오타 / 슬래시(<code>/</code>) 위치까지 정확히 일치해야 합니다. 한 글자만 달라도 <code>redirect_uri_mismatch</code> 오류가 발생합니다.</div>
-    <p>입력 후 <strong>저장</strong>.</p>
+    <div class="warn">⚠️ 오타 / 슬래시 위치까지 정확히 일치해야 합니다. 한 글자만 달라도 <code>redirect_uri_mismatch</code> 오류가 발생합니다.</div>
+    <p>입력 후 <strong>만들기</strong>.</p>
+    <div class="screenshot">
+      <img src="images/15.png" alt="승인된 리디렉션 URI 입력" loading="lazy" />
+      <div class="caption">URI 1 칸에 <code>https://www.integromat.com/oauth/cb/google-restricted</code>.</div>
+    </div>
   </section>
 
-  <section class="card" id="step8">
-    <h2><span class="step-num">8</span> Client ID / Secret 복사</h2>
-    <p>생성이 완료되면 아래 2개 값을 복사합니다.</p>
-    <ul>
-      <li><strong>Client ID</strong></li>
-      <li><strong>Client Secret</strong></li>
-    </ul>
+  <section class="card" id="step16">
+    <h2><span class="step-num">16</span> Client ID / Secret 확인</h2>
+    <p>생성 완료 모달에 <strong>클라이언트 ID</strong>와 <strong>클라이언트 보안 비밀번호</strong>가 표시됩니다. 이 2개를 안전한 곳에 복사해 두세요.</p>
+    <div class="screenshot">
+      <img src="images/16.png" alt="OAuth 클라이언트 생성됨 - Client ID와 Secret" loading="lazy" />
+      <div class="caption">⚠️ 이 모달을 닫으면 더 이상 비밀번호를 보거나 다운로드할 수 없습니다 — 반드시 미리 복사.</div>
+    </div>
   </section>
 
-  <section class="card" id="step9">
-    <h2><span class="step-num">9</span> Make에서 연결</h2>
+  <section class="card" id="step17">
+    <h2><span class="step-num">17</span> API 라이브러리 열기</h2>
+    <p>이제 Google Drive API를 활성화할 차례입니다. 왼쪽 햄버거 메뉴 <span class="menu-path">API 및 서비스 → 라이브러리</span> 클릭.</p>
+    <div class="screenshot">
+      <img src="images/17.png" alt="왼쪽 메뉴 - API 및 서비스 - 라이브러리" loading="lazy" />
+      <div class="caption">햄버거 메뉴 → API 및 서비스 → 라이브러리.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step18">
+    <h2><span class="step-num">18</span> Google Drive API 검색</h2>
+    <p>검색창에 <code>google drive</code>를 입력하면 관련 API 목록이 나옵니다. 첫 번째 <strong>Google Drive API</strong> 카드를 클릭합니다.</p>
+    <div class="screenshot">
+      <img src="images/18.png" alt="API 라이브러리 - google drive 검색 결과" loading="lazy" />
+      <div class="caption">유사한 API들이 함께 뜨므로 정확히 <strong>Google Drive API</strong>(첫 번째)를 선택.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step19">
+    <h2><span class="step-num">19</span> Google Drive API 사용</h2>
+    <p>Google Drive API 상세 페이지에서 파란색 <strong>사용</strong> 버튼을 클릭합니다.</p>
+    <div class="screenshot">
+      <img src="images/19.png" alt="Google Drive API 사용 버튼" loading="lazy" />
+      <div class="caption"><strong>사용</strong> 버튼 클릭 — 이게 사실상 Google Cloud 쪽 마지막 작업입니다.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step20">
+    <h2><span class="step-num">20</span> API 사용 설정 확인</h2>
+    <p>측정항목 화면이 뜨면 활성화 완료. <strong>상태: 사용 설정됨</strong>이 표시됩니다.</p>
+    <div class="screenshot">
+      <img src="images/20.png" alt="Drive API 사용 설정 완료 - 측정항목 대시보드" loading="lazy" />
+      <div class="caption">측정항목 페이지가 보이면 Drive API가 정상 활성화된 상태.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step21">
+    <h2><span class="step-num">21</span> 클라이언트 상세 다시 확인</h2>
+    <p>왼쪽 메뉴 <span class="menu-path">클라이언트</span> → 만든 OAuth 클라이언트 클릭. 우측에서 <strong>Client ID</strong>와 <strong>Client Secret</strong>을 다시 확인할 수 있습니다.</p>
+    <div class="screenshot">
+      <img src="images/21.png" alt="OAuth 클라이언트 상세 화면" loading="lazy" />
+      <div class="caption">Redirect URI가 <code>google-restricted</code>로 들어가 있는지 마지막 점검.</div>
+    </div>
+  </section>
+
+  <section class="card" id="step22">
+    <h2><span class="step-num">22</span> Make에서 연결</h2>
     <ol>
       <li>Make로 돌아가 Google Drive 모듈 추가</li>
       <li><strong>Create a connection</strong> 클릭</li>
       <li><strong>Advanced settings</strong> 토글 켜기</li>
       <li>앞서 복사한 <strong>Client ID</strong> / <strong>Client Secret</strong> 붙여넣기</li>
+      <li><strong>Sign in with Google</strong> → 권한 모두 허용</li>
     </ol>
+    <p>완료되면 Google Drive 모듈이 정상 연결됩니다. ✅</p>
   </section>
 
-  <section class="card" id="step10">
-    <h2><span class="step-num">10</span> Google 로그인</h2>
-    <ol>
-      <li><strong>Sign in with Google</strong> 클릭</li>
-      <li>요청된 권한 모두 허용</li>
-      <li>완료되면 연결 성공 ✅</li>
-    </ol>
-  </section>
-
-  <h2 id="errors" style="margin-top:64px;">자주 발생하는 오류</h2>
+  <h2 id="errors" style="margin-top:56px;">자주 발생하는 오류</h2>
 
   <div class="err">
     <h3>1. redirect_uri_mismatch</h3>
     <p><strong>원인</strong></p>
     <ul>
       <li>Redirect URI 오타</li>
-      <li>마지막 슬래시 누락 또는 잘못된 경로</li>
+      <li>잘못된 경로 (<code>google-restricted</code>가 아닌 다른 값으로 등록)</li>
     </ul>
     <p><strong>해결</strong> — 아래 주소를 그대로 등록하세요.</p>
     <div class="url-box">
@@ -439,12 +542,12 @@
     <ul>
       <li>테스트 사용자 미등록</li>
       <li>OAuth 동의 화면 설정 누락</li>
-      <li>Gmail 개인 계정 사용</li>
+      <li>Gmail 개인 계정 사용 시 정책 제한</li>
     </ul>
     <p><strong>해결</strong></p>
     <ul>
-      <li>테스트 사용자 추가 (Step 5)</li>
-      <li>External 설정 확인 (Step 4)</li>
+      <li>테스트 사용자 추가 (Step 11~12)</li>
+      <li>External 설정 확인 (Step 7)</li>
       <li>가능하면 회사 계정 사용</li>
     </ul>
   </div>
@@ -458,10 +561,11 @@
       <li><strong>Google Drive API</strong> 검색</li>
       <li>클릭 후 <strong>사용</strong> 버튼 클릭</li>
     </ol>
+    <p>→ Step 17 ~ 20 참고.</p>
   </div>
 
   <footer>
-    Make × Google Drive 연결 설정 가이드
+    Make × Google Drive 연결 설정 가이드 · 실제 화면 캡쳐 21장 포함
   </footer>
 
 </div>
